@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,50 +19,61 @@ namespace TestApp.Models.Repositories
             _dbContext = dbContext;
         }
 
-        public int AddProduct(Product product)
+        public async Task AddProduct(Product product)
         {
             if(product == null)
             {
                 throw new Exception("Product object is null");
             }
+
             _dbContext.Products.Add(product);
-            _dbContext.SaveChanges();
-            return product.Id;
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void DeleteProduct(Product product)
+        public async Task DeleteProduct(Product product)
         {
             if (product == null)
             {
                 throw new Exception("Product object is null");
             }
             _dbContext.Products.Remove(product);
-            _dbContext.SaveChanges();
+            _dbContext.SaveChangesAsync();
         }
 
-        public List<Product> GetAllProducts()
+        public IEnumerable<Product> GetAllProducts()
         {
-            return _dbContext.Products.ToList();
+            return _dbContext.Products;
         }
 
-        public Product GetProduct(int productId)
+        public async Task<Product> GetProduct(int productId)
         {
             if(productId < 0)
             {
                 throw new Exception("Product id is negative");
             }
-            return _dbContext.Products.FirstOrDefault(p => p.Id == productId);
+            return await _dbContext.Products.FindAsync(productId);
         }
 
-        public int UpdateProduct(Product product)
+        public async Task<bool> UpdateProduct(Product product)
         {
             if (product == null)
             {
                 throw new Exception("Product object is null");
             }
-            _dbContext.Products.Update(product);
-            _dbContext.SaveChanges();
-            return product.Id;
+
+            if (ProductExists(product.Id))
+            {
+                _dbContext.Entry(product).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ProductExists(int id)
+        {
+            return _dbContext.Products.Any(e => e.Id == id);
         }
     }
 }

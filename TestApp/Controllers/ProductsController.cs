@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestApp.Database;
 using TestApp.Models.Entities;
+using TestApp.Models.Interfaces;
 
 namespace TestApp.Controllers
 {
@@ -14,18 +15,18 @@ namespace TestApp.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly DatabaseContext _context;
+        private readonly IProductRepository _repository;
 
-        public ProductsController(DatabaseContext context)
+        public ProductsController(IProductRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/Products
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return _context.Products;
+            return _repository.GetAllProducts();
         }
 
         // GET: api/Products/5
@@ -37,7 +38,7 @@ namespace TestApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _repository.GetProduct(id).ConfigureAwait(false);
 
             if (product == null)
             {
@@ -61,25 +62,14 @@ namespace TestApp.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-
-            try
+            if (await _repository.UpdateProduct(product).ConfigureAwait(false))
             {
-                await _context.SaveChangesAsync();
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
-
-            return NoContent();
         }
 
         // POST: api/Products
@@ -91,8 +81,7 @@ namespace TestApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            await _repository.AddProduct(product).ConfigureAwait(false);
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
@@ -106,21 +95,17 @@ namespace TestApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _repository.GetProduct(id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            await _repository.DeleteProduct(product).ConfigureAwait(false);
 
             return Ok(product);
         }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
-        }
+
     }
 }

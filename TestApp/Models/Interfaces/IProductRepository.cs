@@ -8,10 +8,10 @@ namespace TestApp.Models.Interfaces
 {
     public interface IProductRepository
     {
-        List<Product> GetAllProducts();
-        Product GetProduct(int productId);
-        int AddProduct(Product product);
-        int UpdateProduct(Product product);
-        void DeleteProduct(Product product);       
+        IEnumerable<Product> GetAllProducts();
+        Task<Product> GetProduct(int productId);
+        Task AddProduct(Product product);
+        Task<bool> UpdateProduct(Product product);
+        Task DeleteProduct(Product product);       
     }
 }

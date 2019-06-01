@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using TestApp.Database;
+using TestApp.Models.Interfaces;
+using TestApp.Models.Repositories;
 
 namespace TestApp
 {
@@ -39,6 +41,8 @@ namespace TestApp
 
             var dbConnectionString = @"Server=(localdb)\mssqllocaldb; Database=TestAppDB; Trusted_Connection=True;";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
+
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
