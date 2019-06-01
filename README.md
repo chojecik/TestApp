@@ -1,2 +1,2 @@
-# TestApp
-.NET Core 2.1 + Angular 7 app
+# TestApplication
+.NET Core 2.1 + Angular 7 App

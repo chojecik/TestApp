@@ -1,0 +1,43 @@
+<div>
+    <div>
+        <h2>
+            {{pageTitle}}
+        </h2>
+    </div>
+    <div style="margin-top: 15px; margin-right: 25px; margin-left: 25px">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Article No</th>
+                    <th>Article Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price in SEK VAT included</th>
+                    <th>Price in SEK VAT excluded</th>
+                    <!--<th></th>-->
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products let i=index" [attr.data.index]="i">
+                    <td>{{i + 1}}</td>
+                    <td>{{product.articleNo}}</td>
+                    <td>{{product.articleName}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.category | categoryConvert}}</td>
+                    <td>{{product.grossPrice}}</td>
+                    <td>{{product.grossPrice * 0.875}}</td>
+                    <!--<td><button class="btn btn-primary" (click)="getProduct(product.id)">Details</button></td>-->
+                    <td><button class="btn btn-success" (click)="updateProduct(product.id)">Update</button></td>
+                    <td><button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
+                </tr>
+                <tr *ngIf="products.length == 0">
+                    <td style="text-align: center" colspan="8">{{tempInfo}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
