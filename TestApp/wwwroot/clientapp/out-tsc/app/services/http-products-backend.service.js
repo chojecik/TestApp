@@ -30,11 +30,7 @@ var HttpProductsBackendService = /** @class */ (function (_super) {
     function HttpProductsBackendService(http) {
         var _this = _super.call(this) || this;
         _this.http = http;
-        _this.addProductUrl = "api/products/addproduct";
-        _this.getAllProductsUrl = "api/products";
-        _this.getProductUrl = "api/products/getproduct";
-        _this.updateProductUrl = "api/products/updateproduct";
-        _this.deleteProductUrl = "api/products/deleteproduct";
+        _this.productUrl = "api/products";
         var headersJson = new Headers({
             'Content-Type': 'application/json',
         });
@@ -42,19 +38,19 @@ var HttpProductsBackendService = /** @class */ (function (_super) {
         return _this;
     }
     HttpProductsBackendService.prototype.addProduct = function (newProduct) {
-        return this.http.post(this.addProductUrl, JSON.stringify(newProduct), this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.post(this.productUrl, JSON.stringify(newProduct), this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.getAllProducts = function () {
-        return this.http.get(this.getAllProductsUrl, this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.get(this.productUrl, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.getProduct = function (productId) {
-        return this.http.get(this.getProductUrl + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.updateProduct = function (updatedProduct) {
-        return this.http.put(this.updateProductUrl, JSON.stringify(updatedProduct), this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.put(this.productUrl, JSON.stringify(updatedProduct), this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.deleteProduct = function (productId) {
-        return this.http.get(this.deleteProductUrl + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.delete(this.productUrl + '/' + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService = __decorate([
         Injectable({

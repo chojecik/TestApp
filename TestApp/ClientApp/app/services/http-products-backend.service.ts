@@ -10,11 +10,7 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class HttpProductsBackendService extends ProductsBackendService {
-    private addProductUrl: string = "api/products/addproduct";
-    private getAllProductsUrl: string = "api/products";
-    private getProductUrl: string = "api/products/getproduct";
-    private updateProductUrl: string = "api/products/updateproduct";
-    private deleteProductUrl: string = "api/products/deleteproduct";
+    private productUrl: string = "api/products";
 
     private jsonContentOptions: RequestOptions;
 
@@ -27,18 +23,18 @@ export class HttpProductsBackendService extends ProductsBackendService {
     }
 
     addProduct(newProduct: Product): Observable<number> {
-        return this.http.post(this.addProductUrl, JSON.stringify(newProduct), this.jsonContentOptions).map(response => response.json() as number);
+        return this.http.post(this.productUrl, JSON.stringify(newProduct), this.jsonContentOptions).map(response => response.json() as number);
     }
     getAllProducts(): Observable<Product[]> {
-        return this.http.get(this.getAllProductsUrl, this.jsonContentOptions).map(response => response.json());
+        return this.http.get(this.productUrl, this.jsonContentOptions).map(response => response.json());
     }
     getProduct(productId: number): Observable<Product> {
-        return this.http.get(this.getProductUrl + productId, this.jsonContentOptions).map(response => response.json());
+        return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());
     }
     updateProduct(updatedProduct: Product): Observable<number> {
-        return this.http.put(this.updateProductUrl, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);
+        return this.http.put(this.productUrl, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);
     }
     deleteProduct(productId: number): Observable<number> {
-        return this.http.get(this.deleteProductUrl + productId, this.jsonContentOptions).map(response => response.json());
+        return this.http.delete(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());
     }
 }

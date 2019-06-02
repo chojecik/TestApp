@@ -33,12 +33,11 @@ var ProductComponent = /** @class */ (function () {
             }
         }, function (error) { return console.log(error); });
     };
-    ProductComponent.prototype.getProduct = function (id) {
-    };
     ProductComponent.prototype.updateProduct = function (id) {
     };
-    ProductComponent.prototype.deleteBook = function (id) {
+    ProductComponent.prototype.deleteProduct = function (id) {
         var _this = this;
+        debugger;
         this.productsService.deleteProduct(id).subscribe(function () { return _this.products.splice(_this.products.findIndex(function (product) { return product.id == id; }), 1); }, function (onError) { return console.log(onError); });
     };
     ProductComponent = __decorate([

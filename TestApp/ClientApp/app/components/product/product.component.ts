@@ -35,15 +35,11 @@ export class ProductComponent implements OnInit {
         )
     }
 
-    getProduct(id: number) {
-        
-    }
-
     updateProduct(id: number) {
 
     }
 
-    deleteBook(id: number) {
+    deleteProduct(id: number) {
         this.productsService.deleteProduct(id).subscribe(
             () => this.products.splice(this.products.findIndex(product => product.id == id), 1),
             onError => console.log(onError)

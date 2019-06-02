@@ -10,13 +10,14 @@ import { ProductsService } from '../app/services/products.service';
 import { ProductsBackendService } from './services/products-backend.service';
 import { HttpProductsBackendService } from './services/http-products-backend.service';
 import { CategoryConvertPipe } from './pipes/category-convert.pipe';
-import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    CategoryConvertPipe
+    CategoryConvertPipe,
+    HomeComponent
   ],
     imports: [
       HttpModule,

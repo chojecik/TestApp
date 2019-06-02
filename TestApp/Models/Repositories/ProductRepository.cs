@@ -37,7 +37,7 @@ namespace TestApp.Models.Repositories
                 throw new Exception("Product object is null");
             }
             _dbContext.Products.Remove(product);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public IEnumerable<Product> GetAllProducts()
