@@ -2,19 +2,30 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3">Test app</h1>
+        </div>
+     </div>
+    <div class="row" style="margin-left: 30px">
+        <div class="col-md-4">
             <p>
                 <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/products">See all products</a>
             </p>
+        </div>
+        <div class="col-md-4">
             <p>
                 <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/product-add">Add new product</a>
             </p>
+        </div>
+        <div class="col-md-4">
             <p>
-                    <label> Choose category</label>
-                    <select id="category" #category>
-                        <option *ngFor="let item of categories | keys" [value]="item.value">{{item.value}}</option>
-                    </select>
-                    <a (click)="navigateToCategory(category.value)" class="btn btn-primary btn-lg">See products from chosen category</a> 
+                <a (click)="navigateToCategory(category.value)" class="btn btn-primary btn-lg">See products from chosen category</a>
+                <br />
+                <label style="font-size: 18px"> Choose category</label>
+                 
+                <select id="category" #category>
+                    <option *ngFor="let item of categories | keys" [value]="item.value">{{item.value}}</option>
+                </select>
             </p>
         </div>
     </div>
+
 </main>
