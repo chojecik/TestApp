@@ -24,6 +24,7 @@ export class ProductCreateUpdateComponent implements OnInit {
     urlParam: number = 0;
     product: Product = new Product();
     categories: any = CategoryType;
+    isInEditMode: boolean = true;
 
     ngOnInit() {
         this.detectUrlParam();
@@ -33,6 +34,13 @@ export class ProductCreateUpdateComponent implements OnInit {
         }
         else if (this.location.isCurrentPathEqualTo("/product-update/" + this.urlParam)) {
             this.pageTitle = "Update product";
+            this.isInEditMode = true;
+            this.downloadProduct();
+            
+        }
+        else {
+            this.pageTitle = "Product details";
+            this.isInEditMode = false;
             this.downloadProduct();
         }
     }
@@ -71,5 +79,9 @@ export class ProductCreateUpdateComponent implements OnInit {
 
     goBack() {
         this.location.back();
+    }
+
+    goHome() {
+        this.router.navigate(["/home"]);
     }
 }

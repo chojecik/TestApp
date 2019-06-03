@@ -21,15 +21,18 @@ export class ProductComponent implements OnInit {
     pageTitle: string = "List of products";
     tempInfo: string = "Loading...";
     urlParam: string = "";
+    isCategorySelected: boolean = false;
 
     ngOnInit() {
         this.detectUrlParam();
 
         if (this.location.isCurrentPathEqualTo("/products")) {
             this.downloadProducts();
+            this.isCategorySelected = false;
         }
         else if (this.location.isCurrentPathEqualTo("/category/" + this.urlParam)) {
             this.downloadProductsOfCategory(this.urlParam);
+            this.isCategorySelected = true;
         }
     }
 
@@ -61,6 +64,10 @@ export class ProductComponent implements OnInit {
         )
     }
 
+    getProduct(id: number) {
+        this.router.navigate(["/product-details", id]);
+    }
+
     updateProduct(id: number) {
         this.router.navigate(["/product-update", id]);
     }
@@ -83,5 +90,9 @@ export class ProductComponent implements OnInit {
 
     goBack() {
         this.location.back();
+    }
+
+    goHome() {
+        this.router.navigate(["/home"]);
     }
 }

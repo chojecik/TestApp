@@ -6,32 +6,33 @@
         <form #productForm="ngForm" (ngSubmit)="onSubmit(product)">
             <div class=" form-group">
                 <label for="articleNo">Article No</label>
-                <input required class="form-control" id="articleNo" [(ngModel)]="product.articleNo" name="articleNo" type="text" />
+                <input [disabled]="!isInEditMode" required class="form-control" id="articleNo" [(ngModel)]="product.articleNo" name="articleNo" type="text" />
             </div>
             <div class=" form-group">
                 <label for="articleName">Article Name</label>
-                <input required class="form-control" id="articleName" [(ngModel)]="product.articleName" name="articleName" type="text" />
+                <input [disabled]="!isInEditMode" required class="form-control" id="articleName" [(ngModel)]="product.articleName" name="articleName" type="text" />
             </div>
             <div class=" form-group">
                 <label for="description">Description</label>
-                <input required class="form-control" id="description" [(ngModel)]="product.description" name="description" type="text" />
+                <input [disabled]="!isInEditMode" required class="form-control" id="description" [(ngModel)]="product.description" name="description" type="text" />
             </div>
             <div class="form-group">
                 <label for="category"> Category</label>
-                <select required class="form-control" id="category" [(ngModel)]="product.category" name="category" #type="ngModel">
+                <select [disabled]="!isInEditMode" required class="form-control" id="category" [(ngModel)]="product.category" name="category" #type="ngModel">
                     <option *ngFor="let item of categories | keys" [value]="item.key">{{item.value}}</option>
                 </select>
             </div>
             <div class=" form-group">
                 <label for="grossPrice">Gross price in SEK</label>
-                <input required class="form-control" id="grossPrice" [(ngModel)]="product.grossPrice" name="grossPrice" type="number" />
+                <input [disabled]="!isInEditMode" required class="form-control" id="grossPrice" [(ngModel)]="product.grossPrice" name="grossPrice" type="number" />
             </div>
-            <div>
+            <div *ngIf="isInEditMode">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>
     <div style="margin-left: 25px">
         <a (click)="goBack()" class="btn btn-warning">Go back</a>
+        <a (click)="goHome()" class="btn btn-info">Redirect to home</a>
     </div>
 </div>

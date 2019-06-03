@@ -1,7 +1,10 @@
 <div>
-    <div style="margin-top: 25px; margin-left: 25px">
-        <h2>
+    <div style="margin-top: 25px; margin-left: 25px" >
+        <h2 *ngIf="!isCategorySelected">
             {{pageTitle}}
+        </h2>
+        <h2 *ngIf="isCategorySelected">
+            List of {{urlParam}} category products
         </h2>
     </div>
     <div style="margin-top: 25px; margin-bottom: 50px; margin-left: 25px">
@@ -17,6 +20,7 @@
                     <th>Price in SEK VAT excluded</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,16 +32,18 @@
                     <td>{{product.category | categoryConvert}}</td>
                     <td>{{product.grossPrice}}</td>
                     <td>{{product.grossPrice * 0.875}}</td>
+                    <td><button class="btn btn-primary" (click)="getProduct(product.id)">Details</button></td>
                     <td><button class="btn btn-success" (click)="updateProduct(product.id)">Update</button></td>
                     <td><button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
                 </tr>
-                <tr *ngIf="products.length == 0">
+                <tr *ngIf="products.length == 0">   
                     <td style="text-align: center" colspan="8">{{tempInfo}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div style="margin-left: 25px">
+    <div style="margin-left: 25px"> 
         <a (click)="goBack()" class="btn btn-warning">Go back</a>
+        <a (click)="goHome()" class="btn btn-info">Redirect to home</a>
     </div>
 </div>
