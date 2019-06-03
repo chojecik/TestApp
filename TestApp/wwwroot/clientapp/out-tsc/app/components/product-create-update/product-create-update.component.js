@@ -27,6 +27,7 @@ var ProductCreateUpdateComponent = /** @class */ (function () {
     }
     ;
     ProductCreateUpdateComponent.prototype.ngOnInit = function () {
+        debugger;
         this.detectUrlParam();
         if (this.location.isCurrentPathEqualTo("/product-add")) {
             this.pageTitle = "Add new product";

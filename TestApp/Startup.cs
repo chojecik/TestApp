@@ -63,7 +63,14 @@ namespace TestApp
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseMvc();
+            app.UseMvc(routes => {
+                
+                routes.MapRoute(
+                    name: "getProduct",
+                    template: "Products/{id:int}",
+                    defaults: new { controller = "Products", action = "GetProduct" }
+                    );
+            });
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseSpa(spa =>

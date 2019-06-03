@@ -13,7 +13,7 @@ export abstract class ProductsBackendService {
 
     abstract getProduct(productId: number): Observable<Product>;
 
-    abstract getProductsOfCategory(category: string): Observable<Product>;
+    abstract getProductsOfCategory(category: string): Observable<Product[]>;
 
     abstract updateProduct(updatedProduct: Product): Observable<number>;
 

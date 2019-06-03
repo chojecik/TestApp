@@ -47,7 +47,7 @@ var HttpProductsBackendService = /** @class */ (function (_super) {
         return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.getProductsOfCategory = function (category) {
-        return this.http.get(this.productUrl + '/' + category, this.jsonContentOptions).map(function (response) { return response.json(); });
+        return this.http.get(this.productUrl + '/category?=' + category, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
     HttpProductsBackendService.prototype.updateProduct = function (updatedProduct) {
         return this.http.put(this.productUrl + '/' + updatedProduct.id, JSON.stringify(updatedProduct), this.jsonContentOptions).map(function (response) { return response.json(); });

@@ -15,7 +15,6 @@
                     <th>Category</th>
                     <th>Price in SEK VAT included</th>
                     <th>Price in SEK VAT excluded</th>
-                    <!--<th></th>-->
                     <th></th>
                     <th></th>
                 </tr>
@@ -29,7 +28,6 @@
                     <td>{{product.category | categoryConvert}}</td>
                     <td>{{product.grossPrice}}</td>
                     <td>{{product.grossPrice * 0.875}}</td>
-                    <!--<td><button class="btn btn-primary" (click)="getProduct(product.id)">Details</button></td>-->
                     <td><button class="btn btn-success" (click)="updateProduct(product.id)">Update</button></td>
                     <td><button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
                 </tr>
@@ -38,6 +36,8 @@
                 </tr>
             </tbody>
         </table>
-
+    </div>
+    <div style="margin-left: 25px">
+        <a (click)="goBack()" class="btn btn-warning">Go back</a>
     </div>
 </div>

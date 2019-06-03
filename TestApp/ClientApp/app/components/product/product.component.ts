@@ -23,7 +23,14 @@ export class ProductComponent implements OnInit {
     urlParam: string = "";
 
     ngOnInit() {
-        this.downloadProducts();
+        this.detectUrlParam();
+
+        if (this.location.isCurrentPathEqualTo("/products")) {
+            this.downloadProducts();
+        }
+        else if (this.location.isCurrentPathEqualTo("/category/" + this.urlParam)) {
+            this.downloadProductsOfCategory(this.urlParam);
+        }
     }
 
     downloadProducts() {
@@ -34,6 +41,20 @@ export class ProductComponent implements OnInit {
                 }
                 else {
                     this.products = products;
+                }
+            },
+            error => console.log(error)
+        )
+    }
+
+    downloadProductsOfCategory(category: string) {
+        this.productsService.getProductsOfCategory(category).subscribe(
+            productsOfCategory => {
+                if (productsOfCategory.length == 0) {
+                    this.tempInfo = "Records not found";
+                }
+                else {
+                    this.products = productsOfCategory;
                 }
             },
             error => console.log(error)
@@ -52,11 +73,15 @@ export class ProductComponent implements OnInit {
         );
     }
 
-    //detectUrlParam() {
-    //    this.activatedRoute.url.subscribe(
-    //        url => {
-    //            this.
-    //        }
-    //    )
-    //}
+    detectUrlParam() {
+        this.activatedRoute.params.subscribe(
+            (params: Params) => {
+                this.urlParam = params['category'];
+            }
+        )
+    }
+
+    goBack() {
+        this.location.back();
+    }
 }

@@ -18,8 +18,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.ngOnInit = function () {
     };
     HomeComponent.prototype.navigateToCategory = function (category) {
-        debugger;
-        //this.router.navigate()
+        this.router.navigate(["/category", category]);
     };
     HomeComponent = __decorate([
         Component({

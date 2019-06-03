@@ -31,13 +31,14 @@ namespace TestApp.Controllers
 
 
         [HttpGet("{category}")]
-        public IEnumerable<Product> GetProductsOfCategory([FromQuery] string category)
+        public IEnumerable<Product> GetProductsOfCategory([FromRoute] string category)
         {
             return _repository.GetAllProducts(category);
         }
 
+
         // GET: api/Products/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProduct([FromRoute] int id)
         {
             if (!ModelState.IsValid)

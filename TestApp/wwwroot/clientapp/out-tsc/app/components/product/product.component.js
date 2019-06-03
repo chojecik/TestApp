@@ -25,7 +25,13 @@ var ProductComponent = /** @class */ (function () {
     }
     ;
     ProductComponent.prototype.ngOnInit = function () {
-        this.downloadProducts();
+        this.detectUrlParam();
+        if (this.location.isCurrentPathEqualTo("/products")) {
+            this.downloadProducts();
+        }
+        else if (this.location.isCurrentPathEqualTo("/category/" + this.urlParam)) {
+            this.downloadProductsOfCategory(this.urlParam);
+        }
     };
     ProductComponent.prototype.downloadProducts = function () {
         var _this = this;
@@ -38,12 +44,33 @@ var ProductComponent = /** @class */ (function () {
             }
         }, function (error) { return console.log(error); });
     };
+    ProductComponent.prototype.downloadProductsOfCategory = function (category) {
+        var _this = this;
+        this.productsService.getProductsOfCategory(category).subscribe(function (productsOfCategory) {
+            if (productsOfCategory.length == 0) {
+                _this.tempInfo = "Records not found";
+            }
+            else {
+                _this.products = productsOfCategory;
+            }
+        }, function (error) { return console.log(error); });
+    };
     ProductComponent.prototype.updateProduct = function (id) {
+        debugger;
         this.router.navigate(["/product-update", id]);
     };
     ProductComponent.prototype.deleteProduct = function (id) {
         var _this = this;
         this.productsService.deleteProduct(id).subscribe(function () { return _this.products.splice(_this.products.findIndex(function (product) { return product.id == id; }), 1); }, function (onError) { return console.log(onError); });
+    };
+    ProductComponent.prototype.detectUrlParam = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.urlParam = params['category'];
+        });
+    };
+    ProductComponent.prototype.goBack = function () {
+        this.location.back();
     };
     ProductComponent = __decorate([
         Component({

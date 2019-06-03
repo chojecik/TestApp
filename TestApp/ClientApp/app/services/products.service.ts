@@ -22,7 +22,7 @@ export class ProductsService {
         return this.productsBackendService.getAllProducts();
     }
 
-    getProductsOfCategory(category: string): Observable<Product> {
+    getProductsOfCategory(category: string): Observable<Product[]> {
         return this.productsBackendService.getProductsOfCategory(category);
     }
 

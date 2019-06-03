@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 
 
     navigateToCategory(category: any) {
-        debugger;
-        //this.router.navigate()
+        this.router.navigate(["/category", category]);
     }
 }

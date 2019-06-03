@@ -32,8 +32,8 @@ export class HttpProductsBackendService extends ProductsBackendService {
     getProduct(productId: number): Observable<Product> {
         return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());
     }
-    getProductsOfCategory(category: string): Observable<Product> {
-        return this.http.get(this.productUrl + '/category?=' + category, this.jsonContentOptions).map(response => response.json());
+    getProductsOfCategory(category: string): Observable<Product[]> {
+        return this.http.get(this.productUrl + '/' + category, this.jsonContentOptions).map(response => response.json());
     }
     updateProduct(updatedProduct: Product): Observable<number> {
         return this.http.put(this.productUrl + '/' + updatedProduct.id, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);
