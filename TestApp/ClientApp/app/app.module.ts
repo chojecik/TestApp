@@ -12,12 +12,16 @@ import { HttpProductsBackendService } from './services/http-products-backend.ser
 import { CategoryConvertPipe } from './pipes/category-convert.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
+import { ProductCreateUpdateComponent } from './components/product-create-update/product-create-update.component';
+import { KeysPipe } from './pipes/keys.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     CategoryConvertPipe,
-    HomeComponent
+    HomeComponent,
+    ProductCreateUpdateComponent,
+    KeysPipe
   ],
     imports: [
       HttpModule,

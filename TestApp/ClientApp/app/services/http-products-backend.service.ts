@@ -32,7 +32,7 @@ export class HttpProductsBackendService extends ProductsBackendService {
         return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());
     }
     updateProduct(updatedProduct: Product): Observable<number> {
-        return this.http.put(this.productUrl, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);
+        return this.http.put(this.productUrl + '/' + updatedProduct.id, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);
     }
     deleteProduct(productId: number): Observable<number> {
         return this.http.delete(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());

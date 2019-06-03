@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using TestApp.Database;
@@ -45,6 +46,16 @@ namespace TestApp.Models.Repositories
             return _dbContext.Products;
         }
 
+        public IEnumerable<Product> GetAllProducts(string category)
+        {
+            if(category != null && category != "")
+            {
+                category = char.ToUpper(category[0]) + category.Substring(1);
+            }
+            var categoryType = Enum.Parse(typeof(CategoryType), category);
+            return _dbContext.Products.Where(p => p.Category.Equals(categoryType)).ToList();
+        }
+
         public async Task<Product> GetProduct(int productId)
         {
             if(productId < 0)
@@ -69,6 +80,7 @@ namespace TestApp.Models.Repositories
             }
 
             return false;
+
         }
 
         private bool ProductExists(int id)

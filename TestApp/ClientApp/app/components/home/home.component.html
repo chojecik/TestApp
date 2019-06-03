@@ -1,11 +1,20 @@
-<div class='container-fluid'>
-    <div class='row'>
-        <div class='col-sm-9 body-content'>
-
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Test app</h1>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/products">See all products</a>
+            </p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/product-add">Add new product</a>
+            </p>
+            <p>
+                    <label> Choose category</label>
+                    <select id="category" #category>
+                        <option *ngFor="let item of categories | keys" [value]="item.value">{{item.value}}</option>
+                    </select>
+                    <a (click)="navigateToCategory(category.value)" class="btn btn-primary btn-lg">See products from chosen category</a> 
+            </p>
         </div>
     </div>
-    <p>
-        <a class="btn btn-primary btn-lg" href="#" role="button" routerLink="/products">See all products</a>
-    </p>
-
-</div>
+</main>

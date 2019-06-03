@@ -15,6 +15,9 @@ import { ProductsBackendService } from './services/products-backend.service';
 import { HttpProductsBackendService } from './services/http-products-backend.service';
 import { CategoryConvertPipe } from './pipes/category-convert.pipe';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { ProductCreateUpdateComponent } from './components/product-create-update/product-create-update.component';
+import { KeysPipe } from './pipes/keys.pipe';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -23,7 +26,10 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 AppComponent,
                 ProductComponent,
-                CategoryConvertPipe
+                CategoryConvertPipe,
+                HomeComponent,
+                ProductCreateUpdateComponent,
+                KeysPipe
             ],
             imports: [
                 HttpModule,

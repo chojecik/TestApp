@@ -9,6 +9,7 @@ namespace TestApp.Models.Interfaces
     public interface IProductRepository
     {
         IEnumerable<Product> GetAllProducts();
+        IEnumerable<Product> GetAllProducts(string category);
         Task<Product> GetProduct(int productId);
         Task AddProduct(Product product);
         Task<bool> UpdateProduct(Product product);

@@ -29,6 +29,12 @@ namespace TestApp.Controllers
             return _repository.GetAllProducts();
         }
 
+        [HttpGet("{category}")]
+        public IEnumerable<Product> GetProductsOfCategory([FromRoute] string category)
+        {
+            return _repository.GetAllProducts(category);
+        }
+
         // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct([FromRoute] int id)

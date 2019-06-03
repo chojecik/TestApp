@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
     }
 
     updateProduct(id: number) {
-
+        this.router.navigate(["/product-update", id]);
     }
 
     deleteProduct(id: number) {

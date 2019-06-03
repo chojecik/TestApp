@@ -4,18 +4,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { Component } from '@angular/core';
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+import { Pipe } from '@angular/core';
+var KeysPipe = /** @class */ (function () {
+    function KeysPipe() {
     }
-    AppComponent = __decorate([
-        Component({
-            selector: 'app-root',
-            templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css']
+    KeysPipe.prototype.transform = function (value, args) {
+        var keys = [];
+        for (var enumItem in value) {
+            if (!isNaN(parseInt(enumItem, 10))) {
+                keys.push({ key: enumItem, value: value[enumItem] });
+            }
+        }
+        return keys;
+    };
+    KeysPipe = __decorate([
+        Pipe({
+            name: 'keys'
         })
-    ], AppComponent);
-    return AppComponent;
+    ], KeysPipe);
+    return KeysPipe;
 }());
-export { AppComponent };
-//# sourceMappingURL=app.component.js.map
+export { KeysPipe };
+//# sourceMappingURL=keys.pipe.js.map

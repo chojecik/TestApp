@@ -9,11 +9,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { ProductComponent } from '../app/components/product/product.component';
 import { AppComponent } from '../app/components/app.component';
+import { HomeComponent } from '../app/components/home/home.component';
+import { ProductCreateUpdateComponent } from '../app/components/product-create-update/product-create-update.component';
 var routes = [
-    { path: '', redirectTo: 'app', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'app', component: AppComponent },
+    { path: 'home', component: HomeComponent },
     { path: 'products', component: ProductComponent },
-    { path: '**', redirectTo: 'app' },
+    { path: 'product-add', component: ProductCreateUpdateComponent },
+    { path: 'product-update/:id', component: ProductCreateUpdateComponent },
+    { path: '**', redirectTo: 'home' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
