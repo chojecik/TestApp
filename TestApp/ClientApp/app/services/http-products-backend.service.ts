@@ -10,6 +10,7 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class HttpProductsBackendService extends ProductsBackendService {
+    
     private productUrl: string = "api/products";
 
     private jsonContentOptions: RequestOptions;
@@ -30,6 +31,9 @@ export class HttpProductsBackendService extends ProductsBackendService {
     }
     getProduct(productId: number): Observable<Product> {
         return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(response => response.json());
+    }
+    getProductsOfCategory(category: string): Observable<Product> {
+        return this.http.get(this.productUrl + '/category?=' + category, this.jsonContentOptions).map(response => response.json());
     }
     updateProduct(updatedProduct: Product): Observable<number> {
         return this.http.put(this.productUrl + '/' + updatedProduct.id, JSON.stringify(updatedProduct), this.jsonContentOptions).map(response => response.json() as number);

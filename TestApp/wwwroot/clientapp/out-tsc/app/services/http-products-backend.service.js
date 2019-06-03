@@ -46,6 +46,9 @@ var HttpProductsBackendService = /** @class */ (function (_super) {
     HttpProductsBackendService.prototype.getProduct = function (productId) {
         return this.http.get(this.productUrl + '/' + productId, this.jsonContentOptions).map(function (response) { return response.json(); });
     };
+    HttpProductsBackendService.prototype.getProductsOfCategory = function (category) {
+        return this.http.get(this.productUrl + '/' + category, this.jsonContentOptions).map(function (response) { return response.json(); });
+    };
     HttpProductsBackendService.prototype.updateProduct = function (updatedProduct) {
         return this.http.put(this.productUrl + '/' + updatedProduct.id, JSON.stringify(updatedProduct), this.jsonContentOptions).map(function (response) { return response.json(); });
     };

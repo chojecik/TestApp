@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'ClientApp/app/models/product';
+import { Location } from '@angular/common';
+import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -11,11 +13,14 @@ export class ProductComponent implements OnInit {
 
     constructor(
         private productsService: ProductsService,
-        private router: Router) { };
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private location: Location) { };
 
     products: Array<Product> = new Array<Product>();
     pageTitle: string = "List of products";
     tempInfo: string = "Loading...";
+    urlParam: string = "";
 
     ngOnInit() {
         this.downloadProducts();
@@ -40,9 +45,18 @@ export class ProductComponent implements OnInit {
     }
 
     deleteProduct(id: number) {
+
         this.productsService.deleteProduct(id).subscribe(
             () => this.products.splice(this.products.findIndex(product => product.id == id), 1),
             onError => console.log(onError)
         );
     }
+
+    //detectUrlParam() {
+    //    this.activatedRoute.url.subscribe(
+    //        url => {
+    //            this.
+    //        }
+    //    )
+    //}
 }

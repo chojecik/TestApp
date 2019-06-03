@@ -22,6 +22,9 @@ var ProductsService = /** @class */ (function () {
     ProductsService.prototype.getAllProducts = function () {
         return this.productsBackendService.getAllProducts();
     };
+    ProductsService.prototype.getProductsOfCategory = function (category) {
+        return this.productsBackendService.getProductsOfCategory(category);
+    };
     ProductsService.prototype.updateProduct = function (updatedProduct) {
         return this.productsBackendService.updateProduct(updatedProduct);
     };

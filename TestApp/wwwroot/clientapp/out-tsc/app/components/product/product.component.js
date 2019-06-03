@@ -9,14 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import 'rxjs/add/operator/switchMap';
 var ProductComponent = /** @class */ (function () {
-    function ProductComponent(productsService, router) {
+    function ProductComponent(productsService, router, activatedRoute, location) {
         this.productsService = productsService;
         this.router = router;
+        this.activatedRoute = activatedRoute;
+        this.location = location;
         this.products = new Array();
         this.pageTitle = "List of products";
         this.tempInfo = "Loading...";
+        this.urlParam = "";
     }
     ;
     ProductComponent.prototype.ngOnInit = function () {
@@ -47,7 +52,9 @@ var ProductComponent = /** @class */ (function () {
             styleUrls: ['./product.component.css']
         }),
         __metadata("design:paramtypes", [ProductsService,
-            Router])
+            Router,
+            ActivatedRoute,
+            Location])
     ], ProductComponent);
     return ProductComponent;
 }());

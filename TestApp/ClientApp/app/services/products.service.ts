@@ -22,6 +22,10 @@ export class ProductsService {
         return this.productsBackendService.getAllProducts();
     }
 
+    getProductsOfCategory(category: string): Observable<Product> {
+        return this.productsBackendService.getProductsOfCategory(category);
+    }
+
     updateProduct(updatedProduct: Product): Observable<number> {
         return this.productsBackendService.updateProduct(updatedProduct);
     }

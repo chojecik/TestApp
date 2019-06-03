@@ -29,8 +29,9 @@ namespace TestApp.Controllers
             return _repository.GetAllProducts();
         }
 
+
         [HttpGet("{category}")]
-        public IEnumerable<Product> GetProductsOfCategory([FromRoute] string category)
+        public IEnumerable<Product> GetProductsOfCategory([FromQuery] string category)
         {
             return _repository.GetAllProducts(category);
         }
