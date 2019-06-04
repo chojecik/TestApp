@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from '../app/components/app.component';
 import { ProductComponent } from '../app/components/product/product.component';
-
 import { ProductsService } from '../app/services/products.service';
 import { ProductsBackendService } from './services/products-backend.service';
 import { HttpProductsBackendService } from './services/http-products-backend.service';
@@ -26,6 +25,7 @@ import { KeysPipe } from './pipes/keys.pipe';
     imports: [
       HttpModule,
       BrowserModule,
+      BrowserAnimationsModule,
       FormsModule,
       AppRoutingModule
   ],

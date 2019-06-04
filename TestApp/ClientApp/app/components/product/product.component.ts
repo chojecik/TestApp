@@ -3,11 +3,16 @@ import { ProductsService } from '../../services/products.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'ClientApp/app/models/product';
 import { Location } from '@angular/common';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { flash } from 'ng-animate';
 import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  animations: [
+        trigger('flash', [transition('* => *', useAnimation(flash))])
+    ]
 })
 export class ProductComponent implements OnInit {
 
@@ -17,6 +22,7 @@ export class ProductComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private location: Location) { };
 
+    flash: any;
     products: Array<Product> = new Array<Product>();
     pageTitle: string = "List of products";
     tempInfo: string = "Loading...";
@@ -95,4 +101,8 @@ export class ProductComponent implements OnInit {
     goHome() {
         this.router.navigate(["/home"]);
     }
+
+
 }
+
+
