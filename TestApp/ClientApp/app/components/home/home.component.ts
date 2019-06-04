@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
     }
 
-
     navigateToCategory(category: any) {
         this.router.navigate(["/category", category]);
     }

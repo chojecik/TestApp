@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from '../app/components/app.component';
 import { ProductComponent } from '../app/components/product/product.component';
 import { ProductsService } from '../app/services/products.service';
@@ -34,6 +35,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 HttpModule,
                 BrowserModule,
+                BrowserAnimationsModule,
                 FormsModule,
                 AppRoutingModule
             ],

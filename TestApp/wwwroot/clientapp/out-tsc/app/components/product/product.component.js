@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { flash } from 'ng-animate';
 import 'rxjs/add/operator/switchMap';
 var ProductComponent = /** @class */ (function () {
     function ProductComponent(productsService, router, activatedRoute, location) {
@@ -22,15 +24,18 @@ var ProductComponent = /** @class */ (function () {
         this.pageTitle = "List of products";
         this.tempInfo = "Loading...";
         this.urlParam = "";
+        this.isCategorySelected = false;
     }
     ;
     ProductComponent.prototype.ngOnInit = function () {
         this.detectUrlParam();
         if (this.location.isCurrentPathEqualTo("/products")) {
             this.downloadProducts();
+            this.isCategorySelected = false;
         }
         else if (this.location.isCurrentPathEqualTo("/category/" + this.urlParam)) {
             this.downloadProductsOfCategory(this.urlParam);
+            this.isCategorySelected = true;
         }
     };
     ProductComponent.prototype.downloadProducts = function () {
@@ -42,7 +47,7 @@ var ProductComponent = /** @class */ (function () {
             else {
                 _this.products = products;
             }
-        }, function (error) { return console.log(error); });
+        });
     };
     ProductComponent.prototype.downloadProductsOfCategory = function (category) {
         var _this = this;
@@ -53,15 +58,17 @@ var ProductComponent = /** @class */ (function () {
             else {
                 _this.products = productsOfCategory;
             }
-        }, function (error) { return console.log(error); });
+        });
+    };
+    ProductComponent.prototype.getProduct = function (id) {
+        this.router.navigate(["/product-details", id]);
     };
     ProductComponent.prototype.updateProduct = function (id) {
-        debugger;
         this.router.navigate(["/product-update", id]);
     };
     ProductComponent.prototype.deleteProduct = function (id) {
         var _this = this;
-        this.productsService.deleteProduct(id).subscribe(function () { return _this.products.splice(_this.products.findIndex(function (product) { return product.id == id; }), 1); }, function (onError) { return console.log(onError); });
+        this.productsService.deleteProduct(id).subscribe(function () { return _this.products.splice(_this.products.findIndex(function (product) { return product.id == id; }), 1); });
     };
     ProductComponent.prototype.detectUrlParam = function () {
         var _this = this;
@@ -72,11 +79,17 @@ var ProductComponent = /** @class */ (function () {
     ProductComponent.prototype.goBack = function () {
         this.location.back();
     };
+    ProductComponent.prototype.goHome = function () {
+        this.router.navigate(["/home"]);
+    };
     ProductComponent = __decorate([
         Component({
             selector: 'app-product',
             templateUrl: './product.component.html',
-            styleUrls: ['./product.component.css']
+            styleUrls: ['./product.component.css'],
+            animations: [
+                trigger('flash', [transition('* => *', useAnimation(flash))])
+            ]
         }),
         __metadata("design:paramtypes", [ProductsService,
             Router,

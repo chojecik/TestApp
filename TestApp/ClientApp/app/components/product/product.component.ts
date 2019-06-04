@@ -51,8 +51,7 @@ export class ProductComponent implements OnInit {
                 else {
                     this.products = products;
                 }
-            },
-            error => console.log(error)
+            }
         )
     }
 
@@ -65,8 +64,7 @@ export class ProductComponent implements OnInit {
                 else {
                     this.products = productsOfCategory;
                 }
-            },
-            error => console.log(error)
+            }
         )
     }
 
@@ -82,7 +80,6 @@ export class ProductComponent implements OnInit {
 
         this.productsService.deleteProduct(id).subscribe(
             () => this.products.splice(this.products.findIndex(product => product.id == id), 1),
-            onError => console.log(onError)
         );
     }
 
@@ -101,8 +98,6 @@ export class ProductComponent implements OnInit {
     goHome() {
         this.router.navigate(["/home"]);
     }
-
-
 }
 
 

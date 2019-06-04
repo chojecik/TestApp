@@ -24,22 +24,28 @@ var ProductCreateUpdateComponent = /** @class */ (function () {
         this.urlParam = 0;
         this.product = new Product();
         this.categories = CategoryType;
+        this.isInEditMode = true;
     }
     ;
     ProductCreateUpdateComponent.prototype.ngOnInit = function () {
-        debugger;
         this.detectUrlParam();
         if (this.location.isCurrentPathEqualTo("/product-add")) {
             this.pageTitle = "Add new product";
         }
         else if (this.location.isCurrentPathEqualTo("/product-update/" + this.urlParam)) {
             this.pageTitle = "Update product";
+            this.isInEditMode = true;
+            this.downloadProduct();
+        }
+        else {
+            this.pageTitle = "Product details";
+            this.isInEditMode = false;
             this.downloadProduct();
         }
     };
     ProductCreateUpdateComponent.prototype.downloadProduct = function () {
         var _this = this;
-        this.productsService.getProduct(this.urlParam).subscribe(function (productFromDB) { return _this.product = productFromDB; }, function (onError) { return console.log(onError); });
+        this.productsService.getProduct(this.urlParam).subscribe(function (productFromDB) { return _this.product = productFromDB; });
     };
     ProductCreateUpdateComponent.prototype.detectUrlParam = function () {
         var _this = this;
@@ -49,15 +55,18 @@ var ProductCreateUpdateComponent = /** @class */ (function () {
     };
     ProductCreateUpdateComponent.prototype.onSubmit = function (product) {
         if (this.location.isCurrentPathEqualTo("/product-add")) {
-            this.productsService.addProduct(product).subscribe(function (onSuccess) { return console.log(onSuccess); }, function (onError) { return console.log(onError); });
+            this.productsService.addProduct(product).subscribe();
         }
         else {
-            this.productsService.updateProduct(product).subscribe(function (onSuccess) { return console.log(onSuccess); }, function (onError) { return console.log(onError); });
+            this.productsService.updateProduct(product).subscribe();
         }
         this.router.navigate(["/products"]);
     };
     ProductCreateUpdateComponent.prototype.goBack = function () {
         this.location.back();
+    };
+    ProductCreateUpdateComponent.prototype.goHome = function () {
+        this.router.navigate(["/home"]);
     };
     ProductCreateUpdateComponent = __decorate([
         Component({

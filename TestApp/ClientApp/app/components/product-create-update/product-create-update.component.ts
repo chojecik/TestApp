@@ -35,8 +35,7 @@ export class ProductCreateUpdateComponent implements OnInit {
         else if (this.location.isCurrentPathEqualTo("/product-update/" + this.urlParam)) {
             this.pageTitle = "Update product";
             this.isInEditMode = true;
-            this.downloadProduct();
-            
+            this.downloadProduct();           
         }
         else {
             this.pageTitle = "Product details";
@@ -47,8 +46,7 @@ export class ProductCreateUpdateComponent implements OnInit {
 
     downloadProduct() {
         this.productsService.getProduct(this.urlParam).subscribe(
-            productFromDB => this.product = productFromDB,
-            onError => console.log(onError)
+            productFromDB => this.product = productFromDB
         )
     }
 
@@ -63,17 +61,12 @@ export class ProductCreateUpdateComponent implements OnInit {
     onSubmit(product: Product) {
         if (this.location.isCurrentPathEqualTo("/product-add")) {
             this.productsService.addProduct(product).subscribe(
-                onSuccess => console.log(onSuccess),
-                onError => console.log(onError)
             );
         }
         else  {
             this.productsService.updateProduct(product).subscribe(
-                onSuccess => console.log(onSuccess),
-                onError => console.log(onError)
             );
         }
-
         this.router.navigate(["/products"]);
     }
 

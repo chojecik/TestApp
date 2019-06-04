@@ -29,7 +29,7 @@ namespace TestApp.Controllers
             return _repository.GetAllProducts();
         }
 
-
+        //GET: api/Products/5
         [HttpGet("{category}")]
         public IEnumerable<Product> GetProductsOfCategory([FromRoute] string category)
         {
@@ -37,7 +37,7 @@ namespace TestApp.Controllers
         }
 
 
-        // GET: api/Products/5
+        // GET: api/Products/5 (int only)
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProduct([FromRoute] int id)
         {
@@ -113,7 +113,5 @@ namespace TestApp.Controllers
 
             return Ok(product);
         }
-
-
     }
 }

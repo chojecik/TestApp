@@ -18,6 +18,7 @@ var routes = [
     { path: 'products', component: ProductComponent },
     { path: 'product-add', component: ProductCreateUpdateComponent },
     { path: 'product-update/:id', component: ProductCreateUpdateComponent },
+    { path: 'product-details/:id', component: ProductCreateUpdateComponent },
     { path: 'category/:category', component: ProductComponent },
     { path: '**', redirectTo: 'home' },
 ];
